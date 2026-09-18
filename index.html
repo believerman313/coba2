@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zxx">
+<html lang="en">
 
 <head>
 	<!--====== Required meta tags ======-->
@@ -55,387 +55,7 @@
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" rel="stylesheet">
 	<link href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" rel="stylesheet" />
 
-	<style>
-		@keyframes pulse-green {
-			0%, 100% {
-				opacity: 1;
-				transform: scale(1);
-			}
-			50% {
-				opacity: 0.45;
-				transform: scale(0.85);
-			}
-		}
-
-		body, button, input, select, textarea, .main-header, .header-brand-name, .main-menu .navigation>li>a, .main-menu .navigation li ul li a {
-			font-family: 'Poppins', sans-serif !important;
-		}
-
-		.header-top .logo-wrapper:hover {
-			transform: translateY(-2px) scale(1.04);
-			box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3) !important;
-		}
-
-		.header-brand-title {
-			font-family: 'Poppins', sans-serif !important;
-		}
-
-		.quick-action-btn:hover {
-			transform: translateY(-1px);
-			box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25) !important;
-			background: rgba(255, 255, 255, 0.3) !important;
-		}
-
-		html, body {
-			overflow-x: clip !important;
-		}
-
-		.page-wrapper {
-			overflow: visible !important;
-			position: relative !important;
-		}
-
-		.main-header {
-			position: sticky !important;
-			top: 0 !important;
-			left: 0 !important;
-			right: 0 !important;
-			width: 100% !important;
-			z-index: 99999 !important;
-			background: #ffffff !important;
-			transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
-		}
-
-		.main-header.header-scrolled {
-			box-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.15) !important;
-		}
-
-		.main-header.header-scrolled .header-top {
-			padding-top: 4px !important;
-			padding-bottom: 4px !important;
-			transition: padding 0.25s ease !important;
-		}
-
-		.main-header.header-scrolled .header-nav-bar {
-			box-shadow: 0 6px 20px -5px rgba(15, 23, 42, 0.1) !important;
-		}
-
-		.header-top {
-			background: linear-gradient(135deg, #064e4b 0%, #085451 100%) !important;
-			border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-			transition: padding 0.25s ease !important;
-		}
-
-		.header-nav-bar {
-			background: #ffffff !important;
-			border-bottom: 1px solid #e2e8f0;
-			box-shadow: 0 4px 16px -2px rgba(15, 23, 42, 0.05);
-			padding: 4px 0 !important;
-			transition: box-shadow 0.25s ease !important;
-		}
-
-		.header-nav-bar, .nav-outer, .main-menu {
-			overflow: visible !important;
-		}
-
-		.main-menu .navigation {
-			display: flex !important;
-			align-items: center !important;
-			justify-content: flex-start !important;
-			gap: 3px 1px !important;
-			margin: 0 !important;
-			padding: 4px 0 !important;
-			list-style: none !important;
-			flex-wrap: wrap !important;
-			overflow: visible !important;
-		}
-
-		.main-menu .navigation>li {
-			position: relative !important;
-			float: none !important;
-			display: inline-block !important;
-			flex-shrink: 0 !important;
-		}
-
-		.main-menu .navigation>li>a {
-			font-family: 'Poppins', sans-serif !important;
-			font-weight: 600 !important;
-			font-size: 14.5px !important;
-			letter-spacing: -0.01em !important;
-			color: #334155 !important;
-			padding: 7px 10px !important;
-			border-radius: 6px !important;
-			display: inline-flex !important;
-			align-items: center !important;
-			text-decoration: none !important;
-			white-space: nowrap !important;
-			transition: all 0.18s cubic-bezier(0.4, 0, 0.2, 1) !important;
-			position: relative;
-		}
-
-		@media (min-width: 992px) and (max-width: 1280px) {
-			.main-menu .navigation>li>a {
-				font-size: 13px !important;
-				padding: 6px 8px !important;
-			}
-		}
-
-		.main-menu .navigation>li>a .nav-chevron {
-			font-size: 9.5px !important;
-			opacity: 0.5;
-			transition: transform 0.25s ease !important;
-			margin-left: 4px !important;
-			color: #64748b;
-		}
-
-		.main-menu .navigation>li:hover>a {
-			color: #0f766e !important;
-			background: #f0fdf4 !important;
-		}
-
-		.main-menu .navigation>li.active>a {
-			color: #0f766e !important;
-			background: #ccfbf1 !important;
-			font-weight: 600 !important;
-		}
-
-		.main-menu .navigation>li.active>a i {
-			color: #0f766e !important;
-		}
-
-		.main-menu .navigation>li:hover>a .nav-chevron {
-			transform: rotate(180deg);
-			opacity: 0.95;
-			color: #0f766e;
-		}
-
-		.main-menu .navigation>li>a::after {
-			display: none !important;
-		}
-
-		.main-menu .navigation li ul.sub-menu-dropdown,
-		.main-menu .navigation li ul {
-			position: absolute !important;
-			top: calc(100% + 2px) !important;
-			left: 0 !important;
-			min-width: 220px !important;
-			background: #ffffff !important;
-			border: 1px solid rgba(226, 232, 240, 0.9) !important;
-			border-radius: 12px !important;
-			padding: 6px !important;
-			box-shadow: 0 20px 45px -10px rgba(15, 23, 42, 0.12), 0 4px 16px rgba(0, 0, 0, 0.04) !important;
-			list-style: none !important;
-			margin: 0 !important;
-			display: block !important;
-			opacity: 0 !important;
-			visibility: hidden !important;
-			pointer-events: none !important;
-			transform: translateY(10px) scale(0.96) !important;
-			transform-origin: top left !important;
-			transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.3s ease !important;
-			z-index: 1000 !important;
-		}
-
-		.main-menu .navigation li ul::before {
-			content: '' !important;
-			position: absolute !important;
-			top: -16px !important;
-			left: -10px !important;
-			right: -10px !important;
-			height: 20px !important;
-			background: transparent !important;
-			display: block !important;
-			z-index: 999 !important;
-		}
-
-		.main-menu .navigation li:hover>ul,
-		.main-menu .navigation li.open>ul {
-			opacity: 1 !important;
-			visibility: visible !important;
-			pointer-events: auto !important;
-			transform: translateY(0) scale(1) !important;
-		}
-
-		.main-menu .navigation li ul li {
-			position: relative !important;
-			float: none !important;
-			width: 100% !important;
-			padding: 0 !important;
-			margin-bottom: 2px !important;
-			border-bottom: none !important;
-			opacity: 0;
-			transform: translateX(-6px);
-			transition: opacity 0.25s ease, transform 0.25s ease !important;
-		}
-
-		.main-menu .navigation li:hover>ul>li,
-		.main-menu .navigation li.open>ul>li {
-			opacity: 1;
-			transform: translateX(0);
-		}
-
-		.main-menu .navigation li ul li:last-child {
-			margin-bottom: 0 !important;
-		}
-
-		.main-menu .navigation li ul li a {
-			display: flex !important;
-			align-items: center !important;
-			justify-content: space-between !important;
-			font-family: 'Poppins', sans-serif !important;
-			font-size: 13.5px !important;
-			font-weight: 500 !important;
-			color: #475569 !important;
-			padding: 8px 13px !important;
-			border-radius: 6px !important;
-			text-decoration: none !important;
-			transition: all 0.2s ease !important;
-			width: 100% !important;
-			border-left: 3px solid transparent;
-		}
-
-		.main-menu .navigation li ul li a .sub-chevron {
-			font-size: 9px !important;
-			opacity: 0.5;
-			transition: transform 0.2s ease !important;
-		}
-
-		.main-menu .navigation li ul li:hover>a {
-			background: linear-gradient(90deg, #f0fdf4 0%, #ffffff 100%) !important;
-			color: #0f766e !important;
-			padding-left: 15px !important;
-			border-left-color: #0f766e !important;
-			font-weight: 600 !important;
-		}
-
-		.main-menu .navigation li ul li:hover>a .sub-chevron {
-			opacity: 1;
-			transform: translateX(3px);
-			color: #0f766e;
-		}
-
-		.main-menu .navigation li ul li ul.sub-sub-menu-dropdown,
-		.main-menu .navigation li ul li ul {
-			position: absolute !important;
-			top: -6px !important;
-			left: calc(100% + 4px) !important;
-			min-width: 200px !important;
-			transform: translateX(10px) scale(0.96) !important;
-			transform-origin: top left !important;
-		}
-
-		.main-menu .navigation li ul li ul li a {
-			font-size: 13px !important;
-			font-weight: 400 !important;
-			color: #64748b !important;
-			padding: 7px 11px !important;
-		}
-
-		.main-menu .navigation li ul li:hover>ul,
-		.main-menu .navigation li ul li.open>ul {
-			opacity: 1 !important;
-			visibility: visible !important;
-			pointer-events: auto !important;
-			transform: translateX(0) scale(1) !important;
-		}
-
-		.main-menu .navigation li ul li ul::before {
-			content: '' !important;
-			position: absolute !important;
-			top: -10px !important;
-			left: -20px !important;
-			width: 24px !important;
-			height: calc(100% + 20px) !important;
-			background: transparent !important;
-			display: block !important;
-			z-index: 999 !important;
-		}
-
-		@media (max-width: 991px) {
-			.navbar-collapse {
-				position: absolute !important;
-				top: 100% !important;
-				left: 15px !important;
-				right: 15px !important;
-				background: #ffffff !important;
-				border-radius: 16px !important;
-				box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15) !important;
-				border: 1px solid rgba(0, 0, 0, 0.08) !important;
-				padding: 16px !important;
-				margin-top: 10px !important;
-				z-index: 1001 !important;
-			}
-
-			.main-menu .navigation {
-				flex-direction: column !important;
-				align-items: flex-start !important;
-				gap: 4px !important;
-				width: 100% !important;
-			}
-
-			.main-menu .navigation>li {
-				width: 100% !important;
-			}
-
-			.main-menu .navigation>li>a {
-				width: 100% !important;
-				justify-content: space-between !important;
-				padding: 12px 14px !important;
-			}
-
-			.main-menu .navigation li ul {
-				position: static !important;
-				opacity: 1 !important;
-				visibility: visible !important;
-				transform: none !important;
-				box-shadow: none !important;
-				border: none !important;
-				padding-left: 12px !important;
-				background: #f8fafc !important;
-				margin-top: 4px !important;
-				border-radius: 8px !important;
-			}
-
-			.main-menu .navigation li ul li ul {
-				left: 0 !important;
-				top: 0 !important;
-				padding-left: 12px !important;
-			}
-		}
-
-		@media (max-width: 768px) {
-			.header-top {
-				padding-top: 6px !important;
-				padding-bottom: 6px !important;
-			}
-
-			.brand-logo img {
-				width: 34px !important;
-				height: 34px !important;
-				margin-right: 8px !important;
-			}
-
-			.header-brand-name {
-				font-size: 15px !important;
-			}
-
-			.article-main-card {
-				padding: 20px 16px !important;
-				border-radius: 18px !important;
-				margin-top: -25px !important;
-			}
-
-			.sidebar-widget-card {
-				padding: 18px 14px !important;
-				border-radius: 16px !important;
-				margin-top: 0 !important;
-			}
-
-			.table-responsive {
-				-webkit-overflow-scrolling: touch;
-			}
-		}
-	</style>
+	
 </head>
 
 <body class="home-two">
@@ -444,7 +64,7 @@
 		<header class="main-header shadow-sm" style="position: sticky; top: 0; z-index: 1000;">
 			<div class="header-top py-2 px-3 text-white" style="background: #064e4b; border-bottom: 1px solid rgba(255,255,255,0.1);">
 				<div class="container d-flex align-items-center justify-content-between">
-					<a href="https://melung.desa.id" class="brand-logo text-decoration-none d-flex align-items-center py-1">
+					<a href="#" class="brand-logo text-decoration-none d-flex align-items-center py-1">
 						<img src="https://melung.desa.id/themes/images/logo-bms.png" alt="Logo Melung" class="mr-3 flex-shrink-0" style="width: 42px; height: 42px; object-fit: contain; filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));">
 						<div class="d-flex flex-column" style="line-height: 1.25;">
 							<span class="text-uppercase" style="font-size: 12.5px; font-weight: 500; letter-spacing: 0.06em; color: #a7f3d0;">
@@ -480,34 +100,34 @@
 							<div class="navbar-collapse collapse clearfix" id="main-menu">
 								<ul class="navigation clearfix">
 									<li class="">
-										<a href="https://melung.desa.id">
+										<a href="#">
 											<i class="fas fa-home mr-1" style="font-size: 11px; opacity: 0.75;"></i>
 											Home
 										</a>
 									</li>
 									<li class="dropdown">
-										<a href="https://melung.desa.id/artikel-detail/profil-desa-melung">
+										<a href="#">
 											<span>Profil</span>
 											<i class="fas fa-chevron-down nav-chevron ml-1"></i>
 										</a>
 										<ul class="sub-menu-dropdown">
-											<li class=""><a href="https://melung.desa.id/artikel-detail/tentang-desa-melung"><span>Tentang Kami</span></a></li>
-											<li class=""><a href="https://melung.desa.id/artikel-detail/visi-dan-misi"><span>Visi Dan Misi</span></a></li>
-											<li class=""><a href="https://melung.desa.id/artikel-detail/sejarah-desa-melung"><span>Sejarah Desa</span></a></li>
-											<li class=""><a href="https://melung.desa.id/berita"><span>Letak Geografis Desa</span></a></li>
-											<li class=""><a href="https://melung.desa.id/artikel-detail/peta-desa-melung"><span>Peta Desa</span></a></li>
-											<li class=""><a href="https://melung.desa.id/artikel-detail/peta-pertanahan-desa-melung"><span>Peta Pertanahan</span></a></li>
-											<li class=""><a href="https://melung.desa.id/artikel-detail/lambang-motto-dan-slogan"><span>Lambang, Motto, Dan Slogan Desa</span></a></li>
-											<li class=""><a href="https://melung.desa.id/artikel-detail/prestasi-desa-melung"><span>Prestasi Desa</span></a></li>
+											<li class=""><a href="#"><span>Tentang Kami</span></a></li>
+											<li class=""><a href="#"><span>Visi Dan Misi</span></a></li>
+											<li class=""><a href="#"><span>Sejarah Desa</span></a></li>
+											<li class=""><a href="#"><span>Letak Geografis Desa</span></a></li>
+											<li class=""><a href="#"><span>Peta Desa</span></a></li>
+											<li class=""><a href="#"><span>Peta Pertanahan</span></a></li>
+											<li class=""><a href="#"><span>Lambang, Motto, Dan Slogan Desa</span></a></li>
+											<li class=""><a href="#"><span>Prestasi Desa</span></a></li>
 										</ul>
 									</li>
 									<li class="dropdown">
-										<a href="https://melung.desa.id/artikel-detail/statistik">
+										<a href="#">
 											<span>Statistik</span>
 											<i class="fas fa-chevron-down nav-chevron ml-1"></i>
 										</a>
 										<ul class="sub-menu-dropdown">
-											<li class=""><a href="https://melung.desa.id/artikel-detail/statistik"><span>Jumlah Kk</span></a></li>
+											<li class=""><a href="#"><span>Jumlah Kk</span></a></li>
 										</ul>
 									</li>
 									<li class="dropdown">
@@ -516,10 +136,10 @@
 											<i class="fas fa-chevron-down nav-chevron ml-1"></i>
 										</a>
 										<ul class="sub-menu-dropdown">
-											<li class=""><a href="https://melung.desa.id/artikel-detail/sumber-daya-alam-desa-melung"><span>Sumber Daya Alam</span></a></li>
-											<li class=""><a href="https://melung.desa.id/artikel-detail/sumber-daya-manusia-desa-melung"><span>Sumber Daya Manusia</span></a></li>
-											<li class=""><a href="https://melung.desa.id/artikel-detail/kesenian-dan-budaya"><span>Kesenian Dan Budaya</span></a></li>
-											<li class=""><a href="https://melung.desa.id/artikel-detail/prasarana-dan-sarana"><span>Prasarana Dan Sarana</span></a></li>
+											<li class=""><a href="#"><span>Sumber Daya Alam</span></a></li>
+											<li class=""><a href="#"><span>Sumber Daya Manusia</span></a></li>
+											<li class=""><a href="#"><span>Kesenian Dan Budaya</span></a></li>
+											<li class=""><a href="#"><span>Prasarana Dan Sarana</span></a></li>
 										</ul>
 									</li>
 									<li class="dropdown">
@@ -529,25 +149,25 @@
 										</a>
 										<ul class="sub-menu-dropdown">
 											<li class="dropdown">
-												<a href="">
+												<a href="#">
 													<span>Pemerintah Desa</span>
 													<i class="fas fa-chevron-right sub-chevron ml-auto"></i>
 												</a>
 												<ul class="sub-sub-menu-dropdown">
-													<li><a href="https://melung.desa.id/artikel-detail/pemerintahan-desa"><span>Pemerintahan Desa</span></a></li>
-													<li><a href="https://melung.desa.id/artikel-detail/bpd"><span>Bpd</span></a></li>
-													<li><a href="https://melung.desa.id/artikel-detail/sejarah-kepemimpinan-desa-melung"><span>Sejarah Kepemimpinan</span></a></li>
+													<li><a href="#"><span>Pemerintahan Desa</span></a></li>
+													<li><a href="#"><span>Bpd</span></a></li>
+													<li><a href="#"><span>Sejarah Kepemimpinan</span></a></li>
 												</ul>
 											</li>
-											<li class=""><a href="https://melung.desa.id/artikel-detail/lembaga-kemasyarakatan-desa"><span>Lembaga Kemasyarakatan Desa</span></a></li>
-											<li class=""><a href="https://melung.desa.id/artikel-detail/lembaga-adat-desa"><span>Lembaga Adat Desa</span></a></li>
-											<li class=""><a href="https://melung.desa.id/artikel-detail/kelompok-tani"><span>Kelompok Tani</span></a></li>
-											<li class=""><a href="https://melung.desa.id/artikel-detail/organisasi-sosial-keagamaan"><span>Organisasi Sosial Keagamaan</span></a></li>
-											<li class=""><a href="https://melung.desa.id/artikel-detail/organisasi-sosial-kemasyarakatan"><span>Organisasi Sosial Kemasyarakatan</span></a></li>
-											<li class=""><a href="https://melung.desa.id/artikel-detail/lembaga-lainnya"><span>Lembaga Lainnya</span></a></li>
+											<li class=""><a href="#"><span>Lembaga Kemasyarakatan Desa</span></a></li>
+											<li class=""><a href="#"><span>Lembaga Adat Desa</span></a></li>
+											<li class=""><a href="#"><span>Kelompok Tani</span></a></li>
+											<li class=""><a href="#"><span>Organisasi Sosial Keagamaan</span></a></li>
+											<li class=""><a href="#"><span>Organisasi Sosial Kemasyarakatan</span></a></li>
+											<li class=""><a href="#"><span>Lembaga Lainnya</span></a></li>
 										</ul>
 									</li>
-									<li class=""><a href="https://melung.desa.id/artikel-detail/transparansi"><span>Transparansi</span></a></li>
+									<li class=""><a href="#"><span>Transparansi</span></a></li>
 									<li class="dropdown">
 										<a href="#">
 											<span>Produk Hukum</span>
@@ -555,30 +175,30 @@
 										</a>
 										<ul class="sub-menu-dropdown">
 											<li class="dropdown">
-												<a href="https://melung.desa.id/artikel-detail/peraturan-desa">
+												<a href="#">
 													<span>Peraturan Desa</span>
 													<i class="fas fa-chevron-right sub-chevron ml-auto"></i>
 												</a>
 												<ul class="sub-sub-menu-dropdown">
-													<li><a href="https://drive.google.com/drive/folders/1N9Sj-MbrsPmm1ecDXDfasMY5gncfdOdX?usp=drive_link"><span>Peraturan Desa</span></a></li>
+													<li><a href="#"><span>Peraturan Desa</span></a></li>
 												</ul>
 											</li>
 											<li class="dropdown">
-												<a href="https://melung.desa.id/artikel-detail/peraturan-kepala-desa">
+												<a href="#">
 													<span>Peraturan Kepala Desa</span>
 													<i class="fas fa-chevron-right sub-chevron ml-auto"></i>
 												</a>
 												<ul class="sub-sub-menu-dropdown">
-													<li><a href="https://drive.google.com/drive/folders/1MG9qdS_4MSsbIEtlMSAU0a5HH_anmvZn?usp=drive_link"><span>Peraturan Kepala Desa</span></a></li>
+													<li><a href="#"><span>Peraturan Kepala Desa</span></a></li>
 												</ul>
 											</li>
 											<li class="dropdown">
-												<a href="https://melung.desa.id/artikel-detail/sk-kepala-desa">
+												<a href="#">
 													<span>Sk Kepala Desa</span>
 													<i class="fas fa-chevron-right sub-chevron ml-auto"></i>
 												</a>
 												<ul class="sub-sub-menu-dropdown">
-													<li><a href="https://drive.google.com/drive/folders/19G2gHkgfZPtUWEw9ZeAqOajTUV5p-_06?usp=drive_link"><span>Sk Kepala Desa Tahun 2025</span></a></li>
+													<li><a href="#"><span>Sk Kepala Desa Tahun 2025</span></a></li>
 												</ul>
 											</li>
 										</ul>
@@ -590,40 +210,40 @@
 										</a>
 										<ul class="sub-menu-dropdown">
 											<li class="dropdown">
-												<a href="https://melung.desa.id/artikel-detail/profil-desa-wisata">
+												<a href="#">
 													<span>Profil Desa Wisata</span>
 													<i class="fas fa-chevron-right sub-chevron ml-auto"></i>
 												</a>
 												<ul class="sub-sub-menu-dropdown">
-													<li><a href="https://drive.google.com/drive/folders/1XVm78w3ZCSO344XA0NksbG70NjQ9YCmw?usp=drive_link"><span>Profile Desa Wisata</span></a></li>
-													<li><a href="https://drive.google.com/drive/folders/1wleFDC9wQOKOyCYX2hqBmmni2qI9-y2b?usp=drive_link"><span>Ldwn 2025</span></a></li>
+													<li><a href="#"><span>Profile Desa Wisata</span></a></li>
+													<li><a href="#"><span>Ldwn 2025</span></a></li>
 												</ul>
 											</li>
 											<li class="dropdown">
-												<a href="">
+												<a href="#">
 													<span>Link Media Sosial</span>
 													<i class="fas fa-chevron-right sub-chevron ml-auto"></i>
 												</a>
 												<ul class="sub-sub-menu-dropdown">
-													<li><a href="@desa_wisata_melung"><span>Media Sosial Desa Wisata Melung</span></a></li>
+													<li><a href="#"><span>Media Sosial Desa Wisata Melung</span></a></li>
 												</ul>
 											</li>
 											<li class="dropdown">
-												<a href="https://melung.desa.id/artikel-detail/peta-desa-wisata">
+												<a href="#">
 													<span>Peta Desa Wisata</span>
 													<i class="fas fa-chevron-right sub-chevron ml-auto"></i>
 												</a>
 												<ul class="sub-sub-menu-dropdown">
-													<li><a href="https://drive.google.com/drive/folders/1LIb8FflLGfi7T8pJ64SyCipKjtKTu1BE?usp=drive_link"><span>Peta Desa Wisata</span></a></li>
+													<li><a href="#"><span>Peta Desa Wisata</span></a></li>
 												</ul>
 											</li>
 											<li class="dropdown">
-												<a href="https://melung.desa.id/artikel-detail/wisata-pagubugan-melung">
+												<a href="#">
 													<span>Wisata Pagubugan</span>
 													<i class="fas fa-chevron-right sub-chevron ml-auto"></i>
 												</a>
 												<ul class="sub-sub-menu-dropdown">
-													<li><a href="https://drive.google.com/drive/folders/1_UV_xXTjaMbdwY560O3t34JpdfQV5WRC?usp=drive_link"><span>Wisata Pagubugan</span></a></li>
+													<li><a href="#"><span>Wisata Pagubugan</span></a></li>
 												</ul>
 											</li>
 										</ul>
@@ -634,14 +254,14 @@
 											<i class="fas fa-chevron-down nav-chevron ml-1"></i>
 										</a>
 										<ul class="sub-menu-dropdown">
-											<li class=""><a href="https://melung.desa.id/artikel-detail/dasar-tujuan-dan-fungsi-bumdesa"><span>Dasar, Tujuan, Dan Fungsi Bumdesa</span></a></li>
-											<li class=""><a href="https://melung.desa.id/artikel-detail/profil-bumdesa"><span>Profil Bumdesa</span></a></li>
-											<li class=""><a href="https://melung.desa.id/artikel-detail/visi-dan-misi-bumdesa"><span>Visi Dan Misi Bumdesa</span></a></li>
-											<li class=""><a href="https://melung.desa.id/artikel-detail/program-kerja-bumdesa"><span>Program Kerja Bumdesa</span></a></li>
-											<li class=""><a href="https://melung.desa.id/artikel-detail/struktur-organisasi-bumdesa"><span>Struktur Organisasi Bumdesa</span></a></li>
-											<li class=""><a href="https://melung.desa.id/artikel-detail/unit-usaha"><span>Unit Usaha</span></a></li>
-											<li class=""><a href="https://melung.desa.id/artikel-detail/lambang-bumdesa"><span>Lambang Bumdesa</span></a></li>
-											<li class=""><a href="https://melung.desa.id/artikel-detail/kontak-bumdesa"><span>Kontak Bumdesa</span></a></li>
+											<li class=""><a href="#"><span>Dasar, Tujuan, Dan Fungsi Bumdesa</span></a></li>
+											<li class=""><a href="#"><span>Profil Bumdesa</span></a></li>
+											<li class=""><a href="#"><span>Visi Dan Misi Bumdesa</span></a></li>
+											<li class=""><a href="#"><span>Program Kerja Bumdesa</span></a></li>
+											<li class=""><a href="#"><span>Struktur Organisasi Bumdesa</span></a></li>
+											<li class=""><a href="#"><span>Unit Usaha</span></a></li>
+											<li class=""><a href="#"><span>Lambang Bumdesa</span></a></li>
+											<li class=""><a href="#"><span>Kontak Bumdesa</span></a></li>
 										</ul>
 									</li>
 									<li class="dropdown">
@@ -650,23 +270,23 @@
 											<i class="fas fa-chevron-down nav-chevron ml-1"></i>
 										</a>
 										<ul class="sub-menu-dropdown">
-											<li class=""><a href="https://melung.desa.id/artikel-detail/sk-ppid"><span>Sk Ppid</span></a></li>
-											<li class=""><a href="https://melung.desa.id/artikel-detail/laporan-berkala"><span>Laporan Berkala</span></a></li>
+											<li class=""><a href="#"><span>Sk Ppid</span></a></li>
+											<li class=""><a href="#"><span>Laporan Berkala</span></a></li>
 										</ul>
 									</li>
-									<li class=""><a href="https://melung.desa.id/berita"><span>Kabar Desa</span></a></li>
+									<li class=""><a href="#"><span>Kabar Desa</span></a></li>
 									<li class="dropdown">
 										<a href="#">
 											<span>Pelayanan</span>
 											<i class="fas fa-chevron-down nav-chevron ml-1"></i>
 										</a>
 										<ul class="sub-menu-dropdown">
-											<li class=""><a href="https://melung.desa.id/artikel-detail/pelayanan-desa"><span>Pelayanan Desa</span></a></li>
-											<li class=""><a href="https://melung.desa.id/artikel-detail/pelayanan-kependudukan"><span>Pelayanan Kependudukan</span></a></li>
+											<li class=""><a href="#"><span>Pelayanan Desa</span></a></li>
+											<li class=""><a href="#"><span>Pelayanan Kependudukan</span></a></li>
 										</ul>
 									</li>
-									<li class=""><a href="https://melung.desa.id/artikel-detail/festival-desa-melung"><span>Festival Desa</span></a></li>
-									<li class=""><a href="https://melung.desa.id/artikel-detail/hubungi-pemdes-melung"><span>Kontak Kami</span></a></li>
+									<li class=""><a href="#"><span>Festival Desa</span></a></li>
+									<li class=""><a href="#"><span>Kontak Kami</span></a></li>
 									<li class="dropdown">
 										<a href="#">
 											<span>Desa Anti Korupsi</span>
@@ -674,61 +294,61 @@
 										</a>
 										<ul class="sub-menu-dropdown">
 											<li class="dropdown">
-												<a href="">
+												<a href="#">
 													<span>Penguatan Tata Laksana</span>
 													<i class="fas fa-chevron-right sub-chevron ml-auto"></i>
 												</a>
 												<ul class="sub-sub-menu-dropdown">
-													<li><a href="https://drive.google.com/drive/folders/1lK9i8yGgZrr8TK6wyDmyfwmEbpZilznN?usp=drive_link"><span>Ada/tidaknya: Perdes/keputusan Kep. Desa/ Sop Tentang Perencanaan, Pelaksanaan, Penatausahaan, Dan Pertanggungjawaban Apbdes</span></a></li>
-													<li><a href="https://drive.google.com/drive/folders/1sZ_VgW32DbajNPtYGigz_lvBxrjFac4k?usp=drive_link"><span>Ada/tidaknya: Perdes/keputusan Kep. Desa/ Sop Tentang Mekanisme Pengawasan Dan Evaluasi Kinerja Perangkat Desa</span></a></li>
-													<li><a href="https://drive.google.com/drive/folders/1A1qcDM_H51eaVa7XcloskvcqEtHwUg9-?usp=drive_link"><span>Ada/tidaknya: Perdes/keputusan Kep. Desa/ Sop Tentang Pengendalian Gratifikasi, Suap Dan Konflik Kepentingan</span></a></li>
-													<li><a href="https://drive.google.com/drive/folders/1-e2tHV9S1Kr5DbdsXqnYamb_2tzUZKSB?usp=drive_link"><span>Ada/tidaknya: Perjanjian Kerjasama Antara Pelaksana Kegiatan Anggaran Dg. Pihak Penyedia, Dan Telah Melalui Proses Pengadaan Barang/jasa Di Desa</span></a></li>
-													<li><a href="https://drive.google.com/drive/folders/1kstmRN8L4JK7vHY3jBYlpcNOPWW-n4qm?usp=drive_link"><span>Ada/tidaknya: Perdes/keputusan Kep. Desa/ Sop Tentang Pakta Integritas Dan Sejenisnya</span></a></li>
+													<li><a href="#"><span>Ada/tidaknya: Perdes/keputusan Kep. Desa/ Sop Tentang Perencanaan, Pelaksanaan, Penatausahaan, Dan Pertanggungjawaban Apbdes</span></a></li>
+													<li><a href="#"><span>Ada/tidaknya: Perdes/keputusan Kep. Desa/ Sop Tentang Mekanisme Pengawasan Dan Evaluasi Kinerja Perangkat Desa</span></a></li>
+													<li><a href="#"><span>Ada/tidaknya: Perdes/keputusan Kep. Desa/ Sop Tentang Pengendalian Gratifikasi, Suap Dan Konflik Kepentingan</span></a></li>
+													<li><a href="#"><span>Ada/tidaknya: Perjanjian Kerjasama Antara Pelaksana Kegiatan Anggaran Dg. Pihak Penyedia, Dan Telah Melalui Proses Pengadaan Barang/jasa Di Desa</span></a></li>
+													<li><a href="#"><span>Ada/tidaknya: Perdes/keputusan Kep. Desa/ Sop Tentang Pakta Integritas Dan Sejenisnya</span></a></li>
 												</ul>
 											</li>
 											<li class="dropdown">
-												<a href="">
+												<a href="#">
 													<span>Penguatan Pengawasan</span>
 													<i class="fas fa-chevron-right sub-chevron ml-auto"></i>
 												</a>
 												<ul class="sub-sub-menu-dropdown">
-													<li><a href="https://drive.google.com/drive/folders/1RKioClBcfvLdJUNrsqQ0kfYNS8XQGPT5?usp=drive_link"><span>Ada/tidaknya: Kegiatan Pengawasan Dan Evaluasi Kinerja Perangkat Desa</span></a></li>
-													<li><a href="https://drive.google.com/drive/folders/1NBXxK8xRdRUZRSv1AkRKFWbQabg_d1Vs?usp=drive_link"><span>Tidak Adanya Aparatur Desa Dalam 3 Tahun Terakhir Yang Terjerat Tindak Pidana Korupsi</span></a></li>
-													<li><a href="https://drive.google.com/drive/folders/1CWuv8JlvuRnbwQ0aj_bn0rt_xH-xqOo-?usp=drive_link"><span>Ada/tidaknya: Tindak Lanjut Hasil Pembinaan, Petunjuk, Arahan, Pengawasan Dan Pemeriksaan Dari Pemerintah Pusat/daerah</span></a></li>
+													<li><a href="#"><span>Ada/tidaknya: Kegiatan Pengawasan Dan Evaluasi Kinerja Perangkat Desa</span></a></li>
+													<li><a href="#"><span>Tidak Adanya Aparatur Desa Dalam 3 Tahun Terakhir Yang Terjerat Tindak Pidana Korupsi</span></a></li>
+													<li><a href="#"><span>Ada/tidaknya: Tindak Lanjut Hasil Pembinaan, Petunjuk, Arahan, Pengawasan Dan Pemeriksaan Dari Pemerintah Pusat/daerah</span></a></li>
 												</ul>
 											</li>
 											<li class="dropdown">
-												<a href="">
+												<a href="#">
 													<span>Penguatan Kualitas Pelayanan Publik</span>
 													<i class="fas fa-chevron-right sub-chevron ml-auto"></i>
 												</a>
 												<ul class="sub-sub-menu-dropdown">
-													<li><a href="https://drive.google.com/drive/folders/1_YS-iCt6s3ZbVpu7CWI4pUgppvQH1wvc?usp=drive_link"><span>Ada/tidaknya: Maklumat Pelayanan</span></a></li>
-													<li><a href="https://drive.google.com/drive/folders/1_YS-iCt6s3ZbVpu7CWI4pUgppvQH1wvc?usp=drive_link"><span>Ada/tidaknya: Layanan Pengaduan Bagi Masyarakat</span></a></li>
-													<li><a href="https://drive.google.com/drive/folders/1HDqIh_SvgZFemCYQktjfPdGPaPnS7qkF?usp=drive_link"><span>Ada/tidaknya: Media Informasi Tentang Apbdes Di Balai Desa Dan/atau Tempat Lain Yang Mudah Diakses Masyarakat</span></a></li>
-													<li><a href="https://drive.google.com/drive/folders/1OP3w76HNhRQ_iV9GQNd7nu8wBv-hMSNr?usp=drive_link"><span>Ada/tidaknya: Keterbukaan Dan Akses Masyarakat Desa Terhadap Informasi Standar Pelayanan Minimal (kesehatan, Pendidikan, Social, Lingkungan, Tramtibumlinmas, Pekerjaan Umum, Pembangunan, Kependudukan, Keuangan, Dan Pelayanan Lainnya)</span></a></li>
-													<li><a href="https://drive.google.com/drive/folders/1SZYwbxBJJi3WFlSeZI1-nay5WBTYaTml?usp=drive_link"><span>Ada/tidaknya: Survei Kepuasan Masyarakat Terhadap Layanan Pemerintah Desa</span></a></li>
+													<li><a href="#"><span>Ada/tidaknya: Maklumat Pelayanan</span></a></li>
+													<li><a href="#"><span>Ada/tidaknya: Layanan Pengaduan Bagi Masyarakat</span></a></li>
+													<li><a href="#"><span>Ada/tidaknya: Media Informasi Tentang Apbdes Di Balai Desa Dan/atau Tempat Lain Yang Mudah Diakses Masyarakat</span></a></li>
+													<li><a href="#"><span>Ada/tidaknya: Keterbukaan Dan Akses Masyarakat Desa Terhadap Informasi Standar Pelayanan Minimal (kesehatan, Pendidikan, Social, Lingkungan, Tramtibumlinmas, Pekerjaan Umum, Pembangunan, Kependudukan, Keuangan, Dan Pelayanan Lainnya)</span></a></li>
+													<li><a href="#"><span>Ada/tidaknya: Survei Kepuasan Masyarakat Terhadap Layanan Pemerintah Desa</span></a></li>
 												</ul>
 											</li>
 											<li class="dropdown">
-												<a href="">
+												<a href="#">
 													<span>Penguatan Partisipasi Masyarakat</span>
 													<i class="fas fa-chevron-right sub-chevron ml-auto"></i>
 												</a>
 												<ul class="sub-sub-menu-dropdown">
-													<li><a href="https://drive.google.com/drive/folders/13Ag5zhUTotPKlZddXNRQd9SvbX1_QxcC?usp=drive_link"><span>Ada/tidaknya: Partisipasi Dan Keterlibatan Masyarakat Dalam Penyusunan Rkp Desa</span></a></li>
-													<li><a href="https://drive.google.com/drive/folders/1QyvualPR7ZO7Gs069-U12jj6dxgAQR_z?usp=drive_link"><span>Ada/tidaknya: Kesadaran Masyarakat Dalam Mencegah Terjadinya Praktik Gratifikasi, Suap Dan Konflik Kepentingan</span></a></li>
-													<li><a href="https://drive.google.com/drive/folders/1DOGoiHIjhmIgNRb_PLtR8s26vAR2wapf?usp=drive_link"><span>Ada/tidaknya: Keterlibatan Lembaga Kemasyarakatan Desa Dan Masyarakat Dalam Pelaksanaan Pembangunan Desa</span></a></li>
+													<li><a href="#"><span>Ada/tidaknya: Partisipasi Dan Keterlibatan Masyarakat Dalam Penyusunan Rkp Desa</span></a></li>
+													<li><a href="#"><span>Ada/tidaknya: Kesadaran Masyarakat Dalam Mencegah Terjadinya Praktik Gratifikasi, Suap Dan Konflik Kepentingan</span></a></li>
+													<li><a href="#"><span>Ada/tidaknya: Keterlibatan Lembaga Kemasyarakatan Desa Dan Masyarakat Dalam Pelaksanaan Pembangunan Desa</span></a></li>
 												</ul>
 											</li>
 											<li class="dropdown">
-												<a href="">
+												<a href="#">
 													<span>Kearifan Lokal</span>
 													<i class="fas fa-chevron-right sub-chevron ml-auto"></i>
 												</a>
 												<ul class="sub-sub-menu-dropdown">
-													<li><a href="https://drive.google.com/drive/folders/1PHWtHpXZ_zX7Acm8gjACzbY6DfeNy--L?usp=drive_link"><span>Ada/tidaknya: Budaya Local/hukum Adat Yang Mendorong Upaya Pencegahan Tindak Pidana Korupsi</span></a></li>
-													<li><a href="https://drive.google.com/drive/folders/1XLoR4F_Wx7xKweDBDCc76OxuezNi16JM?usp=drive_link"><span>Ada/tidaknya: Tokoh Masyarakat, Tokoh Agama, Tokoh Adat, Tokoh Pemuda Dan Kaum Perempuan Yang Mendorong Upaya Pencegahan Tindak Pidana Korupsi</span></a></li>
+													<li><a href="#"><span>Ada/tidaknya: Budaya Local/hukum Adat Yang Mendorong Upaya Pencegahan Tindak Pidana Korupsi</span></a></li>
+													<li><a href="#"><span>Ada/tidaknya: Tokoh Masyarakat, Tokoh Agama, Tokoh Adat, Tokoh Pemuda Dan Kaum Perempuan Yang Mendorong Upaya Pencegahan Tindak Pidana Korupsi</span></a></li>
 												</ul>
 											</li>
 										</ul>
@@ -740,160 +360,6 @@
 				</div>
 			</div>
 		</header>
-
-		<style>
-			/* Hero Banner Style */
-			.hero-page-banner {
-				background: linear-gradient(135deg, #043836 0%, #064e4b 45%, #085451 100%);
-				padding: 65px 0 85px;
-				position: relative;
-				overflow: hidden;
-			}
-
-			.hero-page-banner::before {
-				content: '';
-				position: absolute;
-				top: 0; left: 0; right: 0; bottom: 0;
-				background-size: 24px 24px;
-				pointer-events: none;
-			}
-
-			.hero-page-banner::after {
-				content: '';
-				position: absolute;
-				top: -60px; right: -60px;
-				width: 380px; height: 380px;
-				pointer-events: none;
-			}
-
-			.hero-title-wrapper {
-				border-left: 4px solid #34d399;
-				padding-left: 20px;
-			}
-
-			.berita-content-wrapper {
-				width: 100%;
-				margin-top: -45px;
-				position: relative;
-				z-index: 3;
-			}
-
-			.berita-container-card {
-				background: #ffffff;
-				border-radius: 24px;
-				border: 1px solid #e2e8f0;
-				box-shadow: 0 20px 60px rgba(0, 0, 0, 0.06);
-				padding: 36px 40px;
-			}
-
-			.berita-grid-card {
-				background: #ffffff;
-				border-radius: 20px;
-				overflow: hidden;
-				border: 1px solid #e8edf2;
-				box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04);
-				transition: all 0.35s cubic-bezier(0.165, 0.84, 0.44, 1);
-				display: flex;
-				flex-direction: column;
-				height: 100%;
-			}
-
-			.berita-grid-card:hover {
-				transform: translateY(-8px);
-				box-shadow: 0 16px 36px rgba(0, 0, 0, 0.1);
-				border-color: #0d9488;
-			}
-
-			.berita-img-holder {
-				position: relative;
-				width: 100%;
-				height: 220px;
-				overflow: hidden;
-				background: #f8fafc;
-			}
-
-			.berita-img-holder img {
-				width: 100%;
-				height: 100%;
-				object-fit: cover;
-				transition: transform 0.5s ease;
-			}
-
-			.berita-grid-card:hover .berita-img-holder img {
-				transform: scale(1.08);
-			}
-
-			.berita-badge-label {
-				position: absolute;
-				top: 14px;
-				left: 14px;
-				background: rgba(15, 23, 42, 0.85);
-				backdrop-filter: blur(4px);
-				color: #ffffff;
-				font-size: 11px;
-				font-weight: 700;
-				padding: 4px 12px;
-				border-radius: 20px;
-				letter-spacing: 0.5px;
-				text-transform: uppercase;
-				z-index: 2;
-			}
-
-			.berita-body-content {
-				padding: 22px;
-				display: flex;
-				flex-direction: column;
-				flex-grow: 1;
-				justify-content: space-between;
-			}
-
-			.berita-item-title {
-				font-size: 1.1rem;
-				font-weight: 700;
-				color: #0f172a;
-				line-height: 1.4;
-				margin-bottom: 12px;
-				display: -webkit-box;
-				-webkit-line-clamp: 2;
-				-webkit-box-orient: vertical;
-				overflow: hidden;
-				transition: color 0.2s ease;
-			}
-
-			.berita-grid-card:hover .berita-item-title {
-				color: #096B68;
-			}
-
-			.berita-meta-bar {
-				display: flex;
-				align-items: center;
-				justify-content: space-between;
-				padding-top: 14px;
-				border-top: 1px solid #f1f5f9;
-				font-size: 12.5px;
-				color: #64748b;
-			}
-
-			.btn-berita-detail {
-				display: inline-flex;
-				align-items: center;
-				gap: 6px;
-				padding: 7px 16px;
-				background: #0f172a;
-				color: #ffffff !important;
-				font-size: 12.5px;
-				font-weight: 600;
-				border-radius: 8px;
-				text-decoration: none !important;
-				transition: all 0.2s ease;
-			}
-
-			.btn-berita-detail:hover {
-				background: #096B68;
-				transform: translateY(-1px);
-				box-shadow: 0 4px 12px rgba(9, 107, 104, 0.3);
-			}
-		</style>
 
 		<section class="hero-page-banner">
 			<div class="container">
@@ -910,7 +376,7 @@
 						</div>
 					</div>
 					<div class="col-lg-4 text-lg-right mt-3 mt-lg-0">
-						<a href="https://melung.desa.id" class="btn font-weight-bold" style="background: #ffffff; color: #064e4b; padding: 10px 22px; border-radius: 30px; box-shadow: 0 8px 20px rgba(0,0,0,0.12); font-size: 13.5px;">
+						<a href="#" class="btn font-weight-bold" style="background: #ffffff; color: #064e4b; padding: 10px 22px; border-radius: 30px; box-shadow: 0 8px 20px rgba(0,0,0,0.12); font-size: 13.5px;">
 							<i class="fas fa-home text-success mr-2"></i> Kembali ke Beranda
 						</a>
 					</div>
@@ -937,11 +403,11 @@
 
 						<div class="row g-4">
 							<div class="col-lg-4 col-md-6 mb-4">
-								<a href="https://melung.desa.id/artikel-detail/ipsal-sukses-gelar-kegiatan-menyambut-hut-ri-ke-81" class="text-decoration-none">
+								<a href="#" class="text-decoration-none">
 									<div class="berita-grid-card">
 										<div class="berita-img-holder">
 											<span class="berita-badge-label">BERITA DESA</span>
-											<img src="https://cdn-a.banyumaskab.go.id/newsid/artikel/Melung/2026/09/1788333576_WhatsAppImage2026-09-02at12.43.15.jpeg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=azPIECHH0Z0I8Wq1xqF3%2F20260918%2Fus-east-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20260918T081501Z&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Expires=300&amp;X-Amz-Signature=d2151815c1363c6c166313a781cd5ad56ba271f29f9f83762084c1aacc3e279b" alt="IPSAL Sukses Gelar Kegiatan Menyambut HUT RI Ke-81" loading="lazy">
+											<img src="image/IPSAL Sukses Gelar Kegiatan Menyambut HUT RI Ke-81.jpeg" loading="lazy">
 										</div>
 										<div class="berita-body-content">
 											<div>
@@ -961,11 +427,11 @@
 								</a>
 							</div>
 							<div class="col-lg-4 col-md-6 mb-4">
-								<a href="https://melung.desa.id/artikel-detail/peringatan-hut-ri-ke-81-di-desa-melung-dengan-partisipasi-beragam" class="text-decoration-none">
+								<a href="#" class="text-decoration-none">
 									<div class="berita-grid-card">
 										<div class="berita-img-holder">
 											<span class="berita-badge-label">BERITA DESA</span>
-											<img src="https://cdn-a.banyumaskab.go.id/newsid/artikel/Melung/2026/08/1787019750_WhatsAppImage2026-08-18at08.33.34.jpeg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=azPIECHH0Z0I8Wq1xqF3%2F20260918%2Fus-east-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20260918T081501Z&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Expires=300&amp;X-Amz-Signature=489341566d50dfe49f76eeaddb5ac544419cb3c5d1bb99bbf9cf65b4fa89aa5a" alt="Peringatan HUT RI Ke-81 di Desa Melung dengan Partisipasi Beragam" loading="lazy">
+											<img src="image/Peringatan HUT RI Ke-81 di Desa Melung dengan Partisipasi Beragam.jpeg" alt="Peringatan HUT RI Ke-81 di Desa Melung dengan Partisipasi Beragam" loading="lazy">
 										</div>
 										<div class="berita-body-content">
 											<div>
@@ -985,11 +451,11 @@
 								</a>
 							</div>
 							<div class="col-lg-4 col-md-6 mb-4">
-								<a href="https://melung.desa.id/artikel-detail/wujudkan-tertib-administrasi-pemdes-melung-rilis-daftar-lengkap-syarat-pelayanan-publik" class="text-decoration-none">
+								<a href="#" class="text-decoration-none">
 									<div class="berita-grid-card">
 										<div class="berita-img-holder">
 											<span class="berita-badge-label">BERITA DESA</span>
-											<img src="https://cdn-a.banyumaskab.go.id/newsid/artikel/Melung/2026/07/1783392053_WhatsApp%20Image%202026-07-07%20at%2008.58.58.jpeg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=azPIECHH0Z0I8Wq1xqF3%2F20260918%2Fus-east-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20260918T081501Z&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Expires=300&amp;X-Amz-Signature=e91ed7c9454ce2d7d52750eec94ba293584147afc6d047b23de338ceaa16c6b1" alt="Wujudkan Tertib Administrasi, Pemdes Melung Rilis Daftar Lengkap Syarat Pelayanan Publik" loading="lazy">
+											<img src="image/Wujudkan Tertib Administrasi, Pemdes Melung Rilis Daftar Lengkap Syarat Pelayanan Publik.jpeg" alt="Wujudkan Tertib Administrasi, Pemdes Melung Rilis Daftar Lengkap Syarat Pelayanan Publik" loading="lazy">
 										</div>
 										<div class="berita-body-content">
 											<div>
@@ -1009,11 +475,11 @@
 								</a>
 							</div>
 							<div class="col-lg-4 col-md-6 mb-4">
-								<a href="https://melung.desa.id/artikel-detail/wujudkan-transparansi-pemdes-melung-rilis-panduan-sop-pelayanan-publik-dan-pembagian-tugas-perangkat-desa" class="text-decoration-none">
+								<a href="#" class="text-decoration-none">
 									<div class="berita-grid-card">
 										<div class="berita-img-holder">
 											<span class="berita-badge-label">BERITA DESA</span>
-											<img src="https://cdn-a.banyumaskab.go.id/newsid/artikel/Melung/2026/07/1783391813_WhatsApp%20Image%202026-07-07%20at%2008.59.39.jpeg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=azPIECHH0Z0I8Wq1xqF3%2F20260918%2Fus-east-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20260918T081501Z&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Expires=300&amp;X-Amz-Signature=b57408e6256ce90decd81d74a884c09e62c15b4c7e0bffae3487f8ffb2312082" alt="Wujudkan Transparansi, Pemdes Melung Rilis Panduan SOP Pelayanan Publik dan Pembagian Tugas Perangkat Desa" loading="lazy">
+											<img src="image/Wujudkan Transparansi, Pemdes Melung Rilis Panduan SOP Pelayanan Publik dan Pembagian Tugas Perangkat Desa.jpeg" alt="Wujudkan Transparansi, Pemdes Melung Rilis Panduan SOP Pelayanan Publik dan Pembagian Tugas Perangkat Desa" loading="lazy">
 										</div>
 										<div class="berita-body-content">
 											<div>
@@ -1033,11 +499,11 @@
 								</a>
 							</div>
 							<div class="col-lg-4 col-md-6 mb-4">
-								<a href="https://melung.desa.id/artikel-detail/wujudkan-transparansi-website-desa-melung-sediakan-menu-khusus-desa-anti-korupsi" class="text-decoration-none">
+								<a href="#" class="text-decoration-none">
 									<div class="berita-grid-card">
 										<div class="berita-img-holder">
 											<span class="berita-badge-label">BERITA DESA</span>
-											<img src="https://cdn-a.banyumaskab.go.id/newsid/artikel/Melung/2026/07/1783392347_WhatsApp%20Image%202026-07-07%20at%2008.57.46.jpeg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=azPIECHH0Z0I8Wq1xqF3%2F20260918%2Fus-east-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20260918T081501Z&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Expires=300&amp;X-Amz-Signature=021c893ae2003f601e39ed2e821320e8b784fd63aae7a63c6ee7102afa4e8817" alt="Wujudkan Transparansi, Website Desa Melung Sediakan Menu Khusus &quot;Desa Anti Korupsi&quot;" loading="lazy">
+											<img src="image/Wujudkan Transparansi, Website Desa Melung Sediakan Menu Khusus &quot;Desa Anti Korupsi&quot;.jpeg" alt="Wujudkan Transparansi, Website Desa Melung Sediakan Menu Khusus &quot;Desa Anti Korupsi&quot;" loading="lazy">
 										</div>
 										<div class="berita-body-content">
 											<div>
@@ -1057,11 +523,11 @@
 								</a>
 							</div>
 							<div class="col-lg-4 col-md-6 mb-4">
-								<a href="https://melung.desa.id/artikel-detail/pemerintah-desa-melung-rilis-standar-pelayanan-bidang-pendidikan-berikan-kemudahan-administrasi-bagi-warga" class="text-decoration-none">
+								<a href="#" class="text-decoration-none">
 									<div class="berita-grid-card">
 										<div class="berita-img-holder">
 											<span class="berita-badge-label">BERITA DESA</span>
-											<img src="https://cdn-a.banyumaskab.go.id/newsid/artikel/Melung/2026/07/1783390402_WhatsApp%20Image%202026-07-07%20at%2009.01.51.jpeg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=azPIECHH0Z0I8Wq1xqF3%2F20260918%2Fus-east-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20260918T081501Z&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Expires=300&amp;X-Amz-Signature=c3f0b79cc575faa9bf34faef1c7b37da35c8ea9a5ac6b598bac8ffa95426ced6" alt="Pemerintah Desa Melung Rilis Standar Pelayanan Bidang Pendidikan, Berikan Kemudahan Administrasi Bagi Warga" loading="lazy">
+											<img src="image/Pemerintah Desa Melung Rilis Standar Pelayanan Bidang Pendidikan, Berikan Kemudahan Administrasi Bagi Warga.jpeg" alt="Pemerintah Desa Melung Rilis Standar Pelayanan Bidang Pendidikan, Berikan Kemudahan Administrasi Bagi Warga" loading="lazy">
 										</div>
 										<div class="berita-body-content">
 											<div>
@@ -1081,11 +547,11 @@
 								</a>
 							</div>
 							<div class="col-lg-4 col-md-6 mb-4">
-								<a href="https://melung.desa.id/artikel-detail/tingkatkan-layanan-publik-pemdes-melung-rilis-panduan-akses-informasi-kesehatan-desa" class="text-decoration-none">
+								<a href="#" class="text-decoration-none">
 									<div class="berita-grid-card">
 										<div class="berita-img-holder">
 											<span class="berita-badge-label">BERITA DESA</span>
-											<img src="https://cdn-a.banyumaskab.go.id/newsid/artikel/Melung/2026/07/1783391020_WhatsApp%20Image%202026-07-07%20at%2009.01.00.jpeg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=azPIECHH0Z0I8Wq1xqF3%2F20260918%2Fus-east-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20260918T081501Z&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Expires=300&amp;X-Amz-Signature=d86151ef7800fa72aa6111135712d28a4c2d8056395e801c3a5822f50914fa2b" alt="Tingkatkan Layanan Publik, Pemdes Melung Rilis Panduan Akses Informasi Kesehatan Desa" loading="lazy">
+											<img src="image/Tingkatkan Layanan Publik, Pemdes Melung Rilis Panduan Akses Informasi Kesehatan Desa.jpeg" alt="Tingkatkan Layanan Publik, Pemdes Melung Rilis Panduan Akses Informasi Kesehatan Desa" loading="lazy">
 										</div>
 										<div class="berita-body-content">
 											<div>
@@ -1105,11 +571,11 @@
 								</a>
 							</div>
 							<div class="col-lg-4 col-md-6 mb-4">
-								<a href="https://melung.desa.id/artikel-detail/permudah-administrasi-pemdes-melung-sosialisasikan-5-langkah-alur-pelayanan-tatap-muka" class="text-decoration-none">
+								<a href="#" class="text-decoration-none">
 									<div class="berita-grid-card">
 										<div class="berita-img-holder">
 											<span class="berita-badge-label">BERITA DESA</span>
-											<img src="https://cdn-a.banyumaskab.go.id/newsid/artikel/Melung/2026/07/1783391378_WhatsApp%20Image%202026-07-07%20at%2009.00.23.jpeg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=azPIECHH0Z0I8Wq1xqF3%2F20260918%2Fus-east-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20260918T081501Z&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Expires=300&amp;X-Amz-Signature=f4f24d22271ed9d6dd20628e50e0d4e894fa8f5fe4ff7688326a4e3d1ce27278" alt="Permudah Administrasi, Pemdes Melung Sosialisasikan 5 Langkah Alur Pelayanan Tatap Muka" loading="lazy">
+											<img src="image/Permudah Administrasi, Pemdes Melung Sosialisasikan 5 Langkah Alur Pelayanan Tatap Muka.jpeg" alt="Permudah Administrasi, Pemdes Melung Sosialisasikan 5 Langkah Alur Pelayanan Tatap Muka" loading="lazy">
 										</div>
 										<div class="berita-body-content">
 											<div>
@@ -1129,11 +595,11 @@
 								</a>
 							</div>
 							<div class="col-lg-4 col-md-6 mb-4">
-								<a href="https://melung.desa.id/artikel-detail/guyub-rukun-mbangun-desa-begini-kemeriahan-ruwat-bumi-tiga-tahunan-di-desa-melung-banyumas" class="text-decoration-none">
+								<a href="#" class="text-decoration-none">
 									<div class="berita-grid-card">
 										<div class="berita-img-holder">
 											<span class="berita-badge-label">BERITA DESA</span>
-											<img src="https://cdn-a.banyumaskab.go.id/newsid/artikel/Melung/2026/06/1782097565_WhatsApp%20Image%202026-06-22%20at%2010.03.46.jpeg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=azPIECHH0Z0I8Wq1xqF3%2F20260918%2Fus-east-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20260918T081501Z&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Expires=300&amp;X-Amz-Signature=958aed40c58ba7eed9314edb76eda8ced4481d6300914c978eed3a9617a0f217" alt="Guyub Rukun Mbangun Desa, Begini Kemeriahan Ruwat Bumi Tiga Tahunan di Desa Melung Banyumas" loading="lazy">
+											<img src="image/Guyub Rukun Mbangun Desa, Begini Kemeriahan Ruwat Bumi Tiga Tahunan di Desa Melung Banyumas.jpeg" alt="Guyub Rukun Mbangun Desa, Begini Kemeriahan Ruwat Bumi Tiga Tahunan di Desa Melung Banyumas" loading="lazy">
 										</div>
 										<div class="berita-body-content">
 											<div>
@@ -1153,11 +619,11 @@
 								</a>
 							</div>
 							<div class="col-lg-4 col-md-6 mb-4">
-								<a href="https://melung.desa.id/artikel-detail/pelepasan-siswa-siswi-sd-negeri-melung-tahun-ajaran-20252026-berlangsung-meriah-dan-sarat-budaya-lokal" class="text-decoration-none">
+								<a href="#" class="text-decoration-none">
 									<div class="berita-grid-card">
 										<div class="berita-img-holder">
 											<span class="berita-badge-label">BERITA DESA</span>
-											<img src="https://cdn-a.banyumaskab.go.id/newsid/artikel/Melung/2026/06/1781058423_WhatsApp%20Image%202026-06-10%20at%2009.20.54.jpeg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=azPIECHH0Z0I8Wq1xqF3%2F20260918%2Fus-east-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20260918T081501Z&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Expires=300&amp;X-Amz-Signature=350649f6ab05e810087747b017c87b8fc065192200549eccf45eef62be09adce" alt="Pelepasan Siswa-Siswi SD Negeri Melung Tahun Ajaran 2025/2026 Berlangsung Meriah dan Sarat Budaya Lokal" loading="lazy">
+											<img src="image/Pelepasan Siswa-Siswi SD Negeri Melung Tahun Ajaran 2025/2026 Berlangsung Meriah dan Sarat Budaya Lokal.jpeg" alt="Pelepasan Siswa-Siswi SD Negeri Melung Tahun Ajaran 2025/2026 Berlangsung Meriah dan Sarat Budaya Lokal" loading="lazy">
 										</div>
 										<div class="berita-body-content">
 											<div>
@@ -1186,20 +652,20 @@
 											<span class="page-link" aria-hidden="true">&lsaquo;</span>
 										</li>
 										<li class="page-item active" aria-current="page"><span class="page-link">1</span></li>
-										<li class="page-item"><a class="page-link" href="https://melung.desa.id/berita?page=2">2</a></li>
-										<li class="page-item"><a class="page-link" href="https://melung.desa.id/berita?page=3">3</a></li>
-										<li class="page-item"><a class="page-link" href="https://melung.desa.id/berita?page=4">4</a></li>
-										<li class="page-item"><a class="page-link" href="https://melung.desa.id/berita?page=5">5</a></li>
-										<li class="page-item"><a class="page-link" href="https://melung.desa.id/berita?page=6">6</a></li>
-										<li class="page-item"><a class="page-link" href="https://melung.desa.id/berita?page=7">7</a></li>
-										<li class="page-item"><a class="page-link" href="https://melung.desa.id/berita?page=8">8</a></li>
-										<li class="page-item"><a class="page-link" href="https://melung.desa.id/berita?page=9">9</a></li>
-										<li class="page-item"><a class="page-link" href="https://melung.desa.id/berita?page=10">10</a></li>
+										<li class="page-item"><a class="page-link" href="#">2</a></li>
+										<li class="page-item"><a class="page-link" href="#">3</a></li>
+										<li class="page-item"><a class="page-link" href="#">4</a></li>
+										<li class="page-item"><a class="page-link" href="#">5</a></li>
+										<li class="page-item"><a class="page-link" href="#">6</a></li>
+										<li class="page-item"><a class="page-link" href="#">7</a></li>
+										<li class="page-item"><a class="page-link" href="#">8</a></li>
+										<li class="page-item"><a class="page-link" href="#">9</a></li>
+										<li class="page-item"><a class="page-link" href="#">10</a></li>
 										<li class="page-item disabled" aria-disabled="true"><span class="page-link">...</span></li>
-										<li class="page-item"><a class="page-link" href="https://melung.desa.id/berita?page=51">51</a></li>
-										<li class="page-item"><a class="page-link" href="https://melung.desa.id/berita?page=52">52</a></li>
+										<li class="page-item"><a class="page-link" href="#">51</a></li>
+										<li class="page-item"><a class="page-link" href="#">52</a></li>
 										<li class="page-item">
-											<a class="page-link" href="https://melung.desa.id/berita?page=2" rel="next" aria-label="Next &raquo;">&rsaquo;</a>
+											<a class="page-link" href="#" rel="next" aria-label="Next &raquo;">&rsaquo;</a>
 										</li>
 									</ul>
 								</nav>
@@ -1210,205 +676,6 @@
 				</div>
 			</div>
 		</div>
-
-		<!--====== Footer Section Start ======-->
-		<style>
-			.pagination {
-				display: inline-flex !important;
-				padding-left: 0;
-				list-style: none;
-				gap: 6px;
-				align-items: center;
-				justify-content: center;
-				margin-bottom: 0;
-			}
-			.pagination .page-item .page-link,
-			nav[role="navigation"] a, 
-			nav[role="navigation"] span {
-				position: relative;
-				display: inline-flex !important;
-				align-items: center !important;
-				justify-content: center !important;
-				min-width: 38px;
-				height: 38px;
-				padding: 0 12px;
-				font-size: 13.5px;
-				font-weight: 600;
-				color: #334155 !important;
-				background-color: #ffffff !important;
-				border: 1px solid #e2e8f0 !important;
-				border-radius: 10px !important;
-				text-decoration: none !important;
-				transition: all 0.2s ease;
-			}
-			.pagination .page-item.active .page-link,
-			nav[role="navigation"] span[aria-current="page"] span,
-			nav[role="navigation"] span[aria-current="page"] {
-				z-index: 3;
-				color: #ffffff !important;
-				background-color: #096B68 !important;
-				border-color: #096B68 !important;
-				box-shadow: 0 4px 12px rgba(9, 107, 104, 0.25);
-			}
-			.pagination .page-item .page-link:hover,
-			nav[role="navigation"] a:hover {
-				color: #096B68 !important;
-				background-color: #f0fdf4 !important;
-				border-color: #096B68 !important;
-			}
-			.pagination svg, 
-			nav[role="navigation"] svg {
-				width: 14px !important;
-				height: 14px !important;
-				max-width: 14px !important;
-				max-height: 14px !important;
-				display: inline-block !important;
-				flex-shrink: 0;
-			}
-			nav[role="navigation"] p {
-				font-size: 13px !important;
-				color: #64748b !important;
-				margin-top: 10px !important;
-				margin-bottom: 0 !important;
-				text-align: center;
-			}
-
-			.modern-footer-section {
-				background: linear-gradient(135deg, #042f2e 0%, #064e4b 60%, #0d9488 100%);
-				color: #ffffff;
-				position: relative;
-				overflow: hidden;
-				padding-top: 55px;
-			}
-			.modern-footer-section::before {
-				content: '';
-				position: absolute;
-				top: 0; left: 0; right: 0; bottom: 0;
-				background-size: 24px 24px;
-				pointer-events: none;
-			}
-			.modern-footer-title {
-				font-size: 1.25rem;
-				font-weight: 700;
-				color: #ffffff;
-				letter-spacing: -0.2px;
-				position: relative;
-				padding-bottom: 10px;
-				margin-bottom: 22px;
-			}
-			.modern-footer-title::after {
-				content: '';
-				position: absolute;
-				left: 0;
-				bottom: 0;
-				width: 36px;
-				height: 3.5px;
-				background: #34d399;
-				border-radius: 2px;
-			}
-			.footer-counter-card {
-				background: rgba(255, 255, 255, 0.07);
-				backdrop-filter: blur(8px);
-				border: 1px solid rgba(255, 255, 255, 0.12);
-				border-radius: 14px;
-				padding: 14px 20px;
-				display: flex;
-				align-items: center;
-				justify-content: space-between;
-				transition: all 0.25s ease;
-			}
-			.footer-counter-card:hover {
-				background: rgba(255, 255, 255, 0.14);
-				border-color: rgba(52, 211, 153, 0.4);
-				transform: translateY(-2px);
-			}
-			.counter-icon-box {
-				width: 42px;
-				height: 42px;
-				border-radius: 11px;
-				background: rgba(52, 211, 153, 0.15);
-				color: #34d399;
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				font-size: 16px;
-				flex-shrink: 0;
-			}
-			.counter-text-label {
-				font-size: 13.5px;
-				color: rgba(255, 255, 255, 0.9);
-				font-weight: 700;
-				letter-spacing: 0.3px;
-			}
-			.counter-val-num {
-				font-size: 1.3rem;
-				font-weight: 800;
-				color: #ffffff;
-				line-height: 1.2;
-			}
-			.footer-contact-item {
-				display: flex;
-				align-items: center;
-				gap: 14px;
-				margin-bottom: 18px;
-			}
-			.footer-contact-icon {
-				width: 42px;
-				height: 42px;
-				border-radius: 11px;
-				background: rgba(52, 211, 153, 0.12);
-				border: 1px solid rgba(52, 211, 153, 0.25);
-				color: #34d399;
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				font-size: 16px;
-				flex-shrink: 0;
-			}
-			.contact-label-sub {
-				font-size: 12px;
-				font-weight: 700;
-				color: #34d399;
-				letter-spacing: 0.6px;
-				text-transform: uppercase;
-				line-height: 1.2;
-				margin-bottom: 3px;
-			}
-			.contact-value-text {
-				font-size: 15px;
-				font-weight: 600;
-				color: #ffffff;
-				line-height: 1.4;
-			}
-			.contact-value-text a {
-				color: #ffffff !important;
-				text-decoration: none !important;
-				transition: color 0.2s ease;
-			}
-			.contact-value-text a:hover {
-				color: #34d399 !important;
-			}
-			.footer-social-btn {
-				width: 44px;
-				height: 44px;
-				border-radius: 11px;
-				background: rgba(255, 255, 255, 0.1);
-				border: 1px solid rgba(255, 255, 255, 0.15);
-				color: #ffffff !important;
-				display: inline-flex;
-				align-items: center;
-				justify-content: center;
-				font-size: 16px;
-				transition: all 0.25s ease;
-				text-decoration: none !important;
-			}
-			.footer-social-btn:hover {
-				background: #34d399;
-				color: #042f2e !important;
-				transform: translateY(-2px);
-				box-shadow: 0 6px 16px rgba(52, 211, 153, 0.35);
-			}
-		</style>
 
 		<footer class="footer-section modern-footer-section rel z-1">
 			<div class="container position-relative z-2">
@@ -1514,7 +781,7 @@
 				<div class="copyright-area text-center py-3 border-top mt-2" style="border-color: rgba(255,255,255,0.12) !important;">
 					<p class="mb-0" style="font-size: 14px; color: rgba(255,255,255,0.85);">
 						&copy; 2026 
-						<a href="https://melung.desa.id" class="text-white font-weight-bold text-decoration-none">
+						<a href="#" class="text-white font-weight-bold text-decoration-none">
 							Pemerintah Desa Melung
 						</a>. 
 						Dikembangkan bersama Dinpermasdes &amp; Dinkominfo Kabupaten Banyumas. Hak Cipta Dilindungi.
@@ -1944,21 +1211,4 @@
 				item.addEventListener("mouseenter", function () {
 					menuItems.forEach(otherItem => {
 						if (otherItem !== item) {
-							let submenu = otherItem.querySelector("ul");
-							if (submenu) submenu.style.display = "none";
-						}
-					});
-
-					let submenu = item.querySelector("ul");
-					if (submenu) submenu.style.display = "block";
-
-					let subSubMenus = document.querySelectorAll(".main-menu .navigation ul ul");
-					subSubMenus.forEach(sub => {
-						sub.style.display = "none";
-					});
-				});
-			});
-		});
-	</script>
-</body>
-</html>
+							let
